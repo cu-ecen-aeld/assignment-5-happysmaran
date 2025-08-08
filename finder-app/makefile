@@ -1,13 +1,12 @@
-ifndef CROSS_COMPILE
-override CROSS_COMPILE=
-endif
+CC=$(CROSS_COMPILE)gcc
+CFLAGS=	-g	-Wall
 
 TARGET=writer
 
-all: $(TARGET)
+all:	$(TARGET)
 
-$(TARGET): $(TARGET)
-	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).c
+$(TARGET):	$(TARGET)
+	$(CC)	$(CFLAGS) -o $(TARGET)	$(TARGET).c
 
 clean:
 	rm -f *.o $(TARGET)
