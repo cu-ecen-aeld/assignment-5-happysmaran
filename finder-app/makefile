@@ -2,8 +2,12 @@ ifndef CROSS_COMPILE
 override CROSS_COMPILE=
 endif
 
-writer:
-	$(CROSS_COMPILE)gcc -o writer writer.c
+TARGET=writer
+
+all: $(TARGET)
+
+$(TARGET): $(TARGET)
+	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).c
 
 clean:
-	rm -f writer
+	rm -f *.o $(TARGET)
