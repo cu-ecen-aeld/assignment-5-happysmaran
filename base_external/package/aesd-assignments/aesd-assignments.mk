@@ -15,7 +15,8 @@ AESD_ASSIGNMENTS_SITE_METHOD = git
 AESD_ASSIGNMENTS_GIT_SUBMODULES = YES
 
 define AESD_ASSIGNMENTS_BUILD_CMDS
-	ls -R $(@D)
+	@echo "DEBUG: \$(@D) is $(@D)"
+	@ls -R $(@D) || true
 	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/finder-app all
 endef
 
