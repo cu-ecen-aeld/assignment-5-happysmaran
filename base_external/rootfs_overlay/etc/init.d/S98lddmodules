@@ -9,9 +9,20 @@ case "$1" in
     
     
     # Attempt to load scull and crap
-    insmod /lib/modules/$KVER/updates/scull.ko || insmod /lib/modules/$KVER/extra/scull.ko
-    insmod /lib/modules/$KVER/extra/faulty.ko
-    insmod /lib/modules/$KVER/extra/hello.ko
+	# Force a search for the modules to avoid hardcoded version errors
+	SCULL_PATH=$(find /lib/modules -name scull.ko | head -n 1)
+	FAULTY_PATH=$(find /lib/modules -name faulty.ko | head -n 1)
+	HELLO_PATH=$(find /lib/modules -name hello.ko | head -n 1)
+
+	echo "Loading modules from: $SCULL_PATH"
+
+	if [ -n "$SCULL_PATH" ]; then
+		insmod "$SCULL_PATH"
+		insmod "$FAULTY_PATH"
+		insmod "$HELLO_PATH"
+	else
+		echo "ERROR: Could not find modules in /lib/modules"
+	fi
 
     # Function to create nodes safely
     create_node() {
