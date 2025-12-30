@@ -3,35 +3,36 @@
 case "$1" in
   start)
     echo "Loading LDD modules"
-    # Use absolute paths to the modules built by Buildroot
-    insmod /lib/modules/6.12.27/extra/scull.ko 2>/dev/null
-    insmod /lib/modules/6.12.27/extra/faulty.ko 2>/dev/null
-    insmod /lib/modules/6.12.27/extra/hello.ko 2>/dev/null
+    # NETWORKING because qemu is a bitch
+    ifconfig eth0 up
+    udhcpc -i eth0 -b
+    
+    
+    # Attempt to load scull and crap
+    insmod /lib/modules/6.12.27/updates/scull.ko
+    insmod /lib/modules/6.12.27/extra/faulty.ko
+    insmod /lib/modules/6.12.27/extra/hello.ko
 
-    # Create the scull device nodes
-    scull_major=$(awk '$2=="scull" {print $1}' /proc/devices)
-    if [ -n "$scull_major" ]; then
-        mknod /dev/scull0 c $scull_major 0
-        chmod 666 /dev/scull0
-    fi
+    # Function to create nodes safely
+    create_node() {
+        local module=$1
+        local node=$2
+        major=$(awk '$2=="'$module'" {print $1}' /proc/devices)
+        if [ -n "$major" ]; then
+            rm -f /dev/$node
+            mknod /dev/$node c $major 0
+            chmod 666 /dev/$node
+            echo "Created /dev/$node with major $major"
+        else
+            echo "Could not find major number for $module"
+        fi
+    }
 
-    # Create the faulty device node
-    faulty_major=$(awk '$2=="faulty" {print $1}' /proc/devices)
-    if [ -n "$faulty_major" ]; then
-        mknod /dev/faulty c $faulty_major 0
-        chmod 666 /dev/faulty
-    fi
+    create_node "scull" "scull0"
+    create_node "faulty" "faulty"
     ;;
   stop)
-    echo "Unloading LDD modules"
-    rmmod faulty 2>/dev/null
-    rmmod scull 2>/dev/null
-    rmmod hello 2>/dev/null
+    rmmod faulty scull hello 2>/dev/null
     rm -f /dev/scull0 /dev/faulty
     ;;
-  *)
-    echo "Usage: $0 {start|stop}"
-    exit 1
 esac
-
-exit 0

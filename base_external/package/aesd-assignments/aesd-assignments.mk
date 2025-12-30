@@ -15,7 +15,6 @@ AESD_ASSIGNMENTS_GIT_SUBMODULES = YES
 
 define AESD_ASSIGNMENTS_BUILD_CMDS
 	$(TARGET_CC) $(@D)/finder-app/writer.c -o $(@D)/finder-app/writer
-	$(TARGET_CC) $(@D)/server/aesdsocket.c -o $(@D)/server/aesdsocket
 #	$(MAKE) $(TARGET_CONFIGURE_OPTS) -C $(@D)/finder-app all
 endef
 

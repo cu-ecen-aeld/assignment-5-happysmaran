@@ -1,4 +1,4 @@
-LDD_VERSION = main
+LDD_VERSION = '0fa6848cc5ffe3d06b065d2c6c9713cccbf20038'
 LDD_SITE = git@github.com:cu-ecen-aeld/assignment-7-happysmaran.git
 LDD_SITE_METHOD = git
 
