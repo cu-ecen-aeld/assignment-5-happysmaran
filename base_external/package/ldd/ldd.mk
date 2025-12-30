@@ -6,8 +6,8 @@ LDD_SITE_METHOD = git
 LDD_DEPENDENCIES = linux
 
 define LDD_BUILD_CMDS
-	$(MAKE) $(LINUX_MAKE_FLAGS) -C $(LINUX_DIR) M=$(@D)/scull modules
-	$(MAKE) $(LINUX_MAKE_FLAGS) -C $(LINUX_DIR) M=$(@D)/misc-modules modules
+    $(MAKE) $(LINUX_MAKE_FLAGS) -C $(@D)/scull modules
+    $(MAKE) $(LINUX_MAKE_FLAGS) -C $(@D)/misc-modules modules
 endef
 
 define LDD_INSTALL_TARGET_CMDS
