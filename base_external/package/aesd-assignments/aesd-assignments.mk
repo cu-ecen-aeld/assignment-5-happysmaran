@@ -1,5 +1,5 @@
-AESD_ASSIGNMENTS_VERSION = '803868aef79b0d34cf4cf19957a757f788f24bc9'
-AESD_ASSIGNMENTS_SITE = 'git@github.com:cu-ecen-aeld/assignments-3-and-later-happysmaran.git'
+AESD_ASSIGNMENTS_VERSION = 803868aef79b0d34cf4cf19957a757f788f24bc9
+AESD_ASSIGNMENTS_SITE = git@github.com:cu-ecen-aeld/assignments-3-and-later-happysmaran.git
 AESD_ASSIGNMENTS_SITE_METHOD = git
 
 define AESD_ASSIGNMENTS_BUILD_CMDS
