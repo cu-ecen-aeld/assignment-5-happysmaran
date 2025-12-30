@@ -9,9 +9,9 @@ case "$1" in
     
     
     # Attempt to load scull and crap
-    insmod /lib/modules/6.12.27/updates/scull.ko
-    insmod /lib/modules/6.12.27/extra/faulty.ko
-    insmod /lib/modules/6.12.27/extra/hello.ko
+    insmod /lib/modules/$KVER/updates/scull.ko || insmod /lib/modules/$KVER/extra/scull.ko
+    insmod /lib/modules/$KVER/extra/faulty.ko
+    insmod /lib/modules/$KVER/extra/hello.ko
 
     # Function to create nodes safely
     create_node() {
