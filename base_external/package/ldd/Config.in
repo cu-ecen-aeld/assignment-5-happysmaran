@@ -1,5 +1,4 @@
 config BR2_PACKAGE_LDD
-	bool "ldd"
-	depends on BR2_LINUX_KERNEL
-	help
-	  Includes the scull and misc-modules kernel drivers from ldd3.
+    bool "ldd"
+    help
+      Includes scull and misc-modules.
